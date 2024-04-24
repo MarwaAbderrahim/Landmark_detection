@@ -7,7 +7,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from tensorboardX import SummaryWriter
-
+from pytorchtools import EarlyStopping
 from detection3d.utils.image_tools import save_intermediate_results
 from detection3d.loss.focal_loss import FocalLoss
 from detection3d.utils.file_io import load_config, setup_logger
@@ -21,7 +21,7 @@ def train(config_file):
     :return: None
     """
     assert os.path.isfile(config_file), 'Config not found: {}'.format(config_file)
-
+    early_stopping = EarlyStopping(patience=80, verbose=True, delta=0.001)
     # load config file
     cfg = load_config(config_file)
 
@@ -138,5 +138,10 @@ def train(config_file):
                 last_save_epoch = epoch_idx
 
         writer.add_scalar('Train/Loss', train_loss.item(), batch_idx)
+        early_stopping(train_loss.item())  
+        
+        if early_stopping.early_stop:
+             print("Early stopping")
+             break
 
     writer.close()
