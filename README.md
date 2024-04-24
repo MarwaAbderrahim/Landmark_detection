@@ -47,7 +47,7 @@ Make sure to replace input_folder with the path to the folder containing the inp
 ## Data for training
 First, the users need to prepare medical images and their corresponding landmark annotations. The ``assets`` folder contains an example image (``case_001.nii.gz``) and landmark annotation file (``case_001.csv``). Then, generate landmark masks (e.g, ``case_001_landmark_mask.nii.gz``) with the folowing code :
 ```
-cd Landmarking-main/detection3d/scripts/
+cd Landmarking-main/detection3d/preprocess/
 python gen_landmark_mask.py
 ```
 
@@ -62,7 +62,7 @@ python lmk_det_train.py
 ```
 P.S.: For continuous learning, modify the parameters in the ./config/lmk_train_config.py file, located in detection3d/config. For instance, to continue training from epoch 2000 to 3000, set the parameter __C.general.resume_epoch to 2000 and modify __C.train.epochs to 3000.
 
-## Evaluation
+## Inference
 Run the following code to evaluate a trained model on a single GPU.
 ```
 cd detection3d
@@ -72,11 +72,18 @@ python lmk_det_infer.py -i "image path" -o "output folder path"
 To visualize the predicted landmark file outputted in CSV format using 3D Slicer, you can convert it to FCSV format. Use the following code:
 ```
 cd detection3d
+python error_analysis.py --labeled "path/labeled_landmarks.csv"  --detected "path/detected_landmarks.csv"
+```
+The converted FCSV file will be stored in the same folder as the original CSV predicted landmark file.
+
+## Error analysis
+To mesure the error analysis. Use the following code:
+```
+cd detection3d/vis
 python convert_to_fcsv.py -i "path/predicted_landmarks.csv"
 Replace "predicted_landmarks.csv" with path and the name of your predicted landmark CSV file.
 ```
 The converted FCSV file will be stored in the same folder as the original CSV predicted landmark file.
- 
 ## Citation
 ```bibtex
 @article{liu2021skullengine,
