@@ -1,7 +1,10 @@
 import argparse
 import os
 import sys
-sys.path.append("/workspace/Medical-Detection3d-Toolkit")
+# Ajoutez le chemin parent au chemin d'importation
+parent_dir = os.path.dirname(os.getcwd())
+sys.path.append(parent_dir)
+print("project_dir", parent_dir)
 
 from detection3d.core.lmk_det_train import train
 
