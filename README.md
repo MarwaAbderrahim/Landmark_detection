@@ -3,7 +3,7 @@
 
 
 <p align="center">
-  <img src="./assets/framework.png.png" alt="drawing", width="700"/>
+  <img src="./assets/framework.png" alt="drawing", width="700"/>
 </p>
 
 ## Installation
