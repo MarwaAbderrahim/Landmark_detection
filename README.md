@@ -10,7 +10,7 @@
 The code is tested with ``python=3.8.8``, ``torch=2.0.0``, and ``torchvision=0.15.0``.
 ```
 git clone https://github.com/MarwaAbderrahim/Landmarking.git
-cd Landmarking-main
+cd Landmark_detection
 ```
 Create a new conda environment and install required packages accordingly.
 ```
