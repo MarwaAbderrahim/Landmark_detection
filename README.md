@@ -47,7 +47,7 @@ Make sure to replace input_folder with the path to the folder containing the inp
 ## Generate landmark masks for training
 First, the users need to prepare medical images and their corresponding landmark annotations. The ``assets`` folder contains an example image (``case_001.nii.gz``) and landmark annotation file (``case_001.csv``). Then, generate landmark masks (e.g, ``case_001_landmark_mask.nii.gz``) with the folowing code :
 ```
-cd Landmarking-main/detection3d/preprocess/
+cd Landmark_detection/detection3d/preprocess/
 python gen_landmark_mask.py
 ```
 
@@ -84,12 +84,4 @@ python convert_to_fcsv.py -i "path/predicted_landmarks.csv"
 Replace "predicted_landmarks.csv" with path and the name of your predicted landmark CSV file.
 ```
 The converted FCSV file will be stored in the same folder as the original CSV predicted landmark file.
-## Citation
-```bibtex
-@article{liu2021skullengine,
-  title={SkullEngine: A Multi-stage CNN Framework for Collaborative CBCT Image Segmentation and Landmark Detection},
-  author={Liu, Qin and Deng, Han and Lian, Chunfeng and Chen, Xiaoyang and Xiao, Deqiang and Ma, Lei and Chen, Xu and Kuang, Tianshu and Gateno, Jaime and Yap, Pew-Thian and others},
-  journal={arXiv preprint arXiv:2110.03828},
-  year={2021}
-}
-```
+
