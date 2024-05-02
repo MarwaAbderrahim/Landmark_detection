@@ -70,7 +70,7 @@ def register(moving_images,out_dir, fixed_image):
         save_path = out_dir+'/'+str(name_file)+".nii.gz"
         sitk.WriteImage(moving_resampled, save_path)            
 
-    return moving_resampled_npa  
+    # return moving_resampled_npa  
 
 def main():
     long_description = 'Inference engine for 3d medical image segmentation \n' \
