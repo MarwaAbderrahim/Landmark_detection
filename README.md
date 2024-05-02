@@ -72,7 +72,7 @@ python lmk_det_infer.py -i "image path" -o "output folder path"
 To visualize the predicted landmark file outputted in CSV format using 3D Slicer, you can convert it to FCSV format. Use the following code:
 
 ```
-cd detection3d/vis
+cd detection3d
 python convert_to_fcsv.py -i "path/predicted_landmarks.csv"
 Replace "predicted_landmarks.csv" with path and the name of your predicted landmark CSV file.
 ```
@@ -81,7 +81,7 @@ The converted FCSV file will be stored in the same folder as the original CSV pr
 ## Error analysis
 To mesure the error analysis. Use the following code:
 ```
-cd detection3d
+cd detection3d/vis
 python error_analysis.py --labeled "path/labeled_landmarks.csv"  --detected "path/detected_landmarks.csv"
 ```
 The converted FCSV file will be stored in the same folder as the original CSV predicted landmark file.
