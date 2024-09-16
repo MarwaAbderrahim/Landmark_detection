@@ -17,8 +17,18 @@ Create a new conda environment and install required packages accordingly.
 conda install pytorch==2.0.0 torchvision==0.15.0 torchaudio==2.0.0 pytorch-cuda=11.8 -c pytorch -c nvidia
 pip install -r requirements.txt
 ```
+# DATA preprocessing 
 
-## Preprocessing for training
+## Image data segmentation
+If the images are not segmented, they need to be segmented. A script that allows you to segment images (by multiplying the RAW image with the segmentation mask) is available at /Preprocessing:
+```
+cd preprocessing
+python segmentation.py -i input_folder -o output_folder
+```
+
+Alternatively, you can use this Git repository for AI-based segmentation: https://github.com/AbysMedical/ai-inference-segmentation-v2
+
+## Landmarks preprocessing for training
 
 ### Step 1: Convert FCSV to CSV
 
@@ -63,6 +73,8 @@ python lmk_det_train.py
 P.S.: For continuous learning, modify the parameters in the ./config/lmk_train_config.py file, located in detection3d/config. For instance, to continue training from epoch 2000 to 3000, set the parameter __C.general.resume_epoch to 2000 and modify __C.train.epochs to 3000.
 
 ## Inference
+**If the images are not segmented, they need to be segmented as described above. The inference code integrates two additional preprocessing steps: first, rigid registration of the images, and then cropping to remove empty slices before predicting the landmarks.**
+
 Run the following code to evaluate a trained model on a single GPU.
 ```
 cd detection3d
