@@ -14,60 +14,62 @@ from detection3d.vis.gen_images import load_coordinates_from_csv
 """
 The struct containing the error summary.
 """
-ErrorSummary = namedtuple('ErrorSummary','max_error_tp')
+ErrorSummary = namedtuple('ErrorSummary', 'max_error_tp, global_mean_error')
 
-
-def error_analysis(label_landmark, detection_landmark, decending=True):
+def error_analysis(label_landmark, detection_landmark, descending=True):
     """
-    Analyze landmark detection error and return the error statistics summary.
-    Input arguments:
-    label_landmark: A list of lists containing coordinates of labelled points.
-    detection_landmark: A list of lists containing coordinates of detected points.
-    descending: Flag indicating whether errors are sorted in ascending or descending order.
-    Return:
-    error_summary: Summary of error statistics.
+    Analyse des erreurs de détection des landmarks avec calcul de l'erreur moyenne globale.
     """
-    tp_cases, error_dx, error_dy, error_dz, error_l2 = {}, {}, {}, {}, {}
     mean_error_tp, std_error_tp, median_error_tp, max_error_tp = {}, {}, {}, {}
-    error_sorted_index, error_type, all_cases = {}, {}, {}
+    all_errors = []  # Liste pour stocker toutes les erreurs L2
     names = ["psisl", "asisl", "isl", "ps", "isr", "asisr", "psisr", "sp"]
 
     for landmark_name in names:
-        tp_cases_list = list((detection_landmark) + (label_landmark))
-
-        error_dx_list, error_dy_list, error_dz_list, error_l2_list = [], [], [], []
-        all_file_list = []
-        error_type_list = []
+        error_l2_list = []
         
-        for file_name in tp_cases_list:
-            index = [i[0] for i in detection_landmark].index(landmark_name)
-            dx = detection_landmark[index][1] - label_landmark[index][1]
-            dy = detection_landmark[index][2] - label_landmark[index][2]
-            dz = detection_landmark[index][3] - label_landmark[index][3]
-            l2 = np.linalg.norm([dx, dy, dz])
+        # Parcourir les points des landmarks étiquetés
+        for label_point in label_landmark:
+            # On récupère le nom du landmark dans les points étiquetés
+            if label_point[0] == landmark_name:
+                try:
+                    # On cherche le même nom dans les points détectés
+                    index = [i[0] for i in detection_landmark].index(landmark_name)
+                    
+                    # Calcul des différences dans chaque axe
+                    dx = detection_landmark[index][1] - label_point[1]
+                    dy = detection_landmark[index][2] - label_point[2]
+                    dz = detection_landmark[index][3] - label_point[3]
+                    l2 = np.linalg.norm([dx, dy, dz])
+                    
+                    # Ajouter à la liste des erreurs pour ce landmark et globalement
+                    error_l2_list.append(l2)
+                    all_errors.append(l2)  # Ajout de l'erreur dans la liste globale
+                
+                except ValueError:
+                    # Si le landmark n'est pas détecté, on l'ignore
+                    print(f"Landmark {landmark_name} non détecté, ignoré.")
+                    continue
 
-            error_dx_list.append(dx)
-            error_dy_list.append(dy)
-            error_dz_list.append(dz)
-            error_l2_list.append(l2)
-            all_file_list.append(file_name)
+        # Calculer les statistiques d'erreur uniquement si la liste n'est pas vide
+        if error_l2_list:
+            mean_error_tp[landmark_name] = np.mean(error_l2_list)
+            std_error_tp[landmark_name] = np.std(error_l2_list)
+            median_error_tp[landmark_name] = np.median(error_l2_list)
+            max_error_tp[landmark_name] = np.max(error_l2_list)
+        else:
+            print(f"Aucune erreur trouvée pour {landmark_name}.")
 
-        mean_error_tp[landmark_name] = np.mean(error_l2_list)
-        std_error_tp[landmark_name] = np.std(error_l2_list)
-        median_error_tp[landmark_name] = np.median(error_l2_list)
-        max_error_tp[landmark_name] = np.max(error_l2_list)
+    # Calcul de l'erreur moyenne globale si des erreurs ont été détectées
+    if all_errors:
+        global_mean_error = np.mean(all_errors)
+    else:
+        global_mean_error = 0
+        print("Aucune erreur détectée dans l'ensemble des points.")
 
-        all_cases[landmark_name] = all_file_list
-        tp_cases[landmark_name] = tp_cases_list
-
-        sorted_index_list = np.argsort(error_l2_list)
-        if decending:
-            sorted_index_list = sorted_index_list[::-1]
-        error_sorted_index[landmark_name] = sorted_index_list
-        error_type[landmark_name] = error_type_list
-
+    # Retourne un résumé contenant les erreurs individuelles par landmark et l'erreur moyenne globale
     error_summary = ErrorSummary(
-        max_error_tp=max_error_tp
+        max_error_tp=max_error_tp,
+        global_mean_error=global_mean_error
     )
 
     return error_summary
