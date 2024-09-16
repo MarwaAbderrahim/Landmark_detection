@@ -23,7 +23,7 @@ pip install -r requirements.txt
 If the images are not segmented, they need to be segmented. A script that allows you to segment images (by multiplying the RAW image with the segmentation mask) is available at /Preprocessing:
 ```
 cd preprocessing
-python segmentation.py -i input_folder -o output_folder
+python segmentation.py --input_image path_to_raw_image.nii --input_mask path_to_mask.nii --output output_segmented_image.nii
 ```
 
 Alternatively, you can use this Git repository for AI-based segmentation: https://github.com/AbysMedical/ai-inference-segmentation-v2
