@@ -100,7 +100,7 @@ def generate_landmark_mask(image_folder, landmark_folder, landmark_label_file, s
 def main():
   long_description = 'Generate landmark mask for landmark detection.'
 
-  default_batch_idx = 5
+  default_batch_idx = 1
   default_input = '/mnt/projects/CT_Dental/data_v2'
   default_landmark = '/mnt/projects/CT_Dental/landmark_v2'
   default_output = '/mnt/projects/CT_Dental/landmark_mask_v2/batch_{}_1.5mm'.format(default_batch_idx)
