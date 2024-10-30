@@ -65,6 +65,14 @@ First, users need to prepare the medical images and their corresponding landmark
 cd Landmark_detection/detection3d/scripts
 python gen_landmark_mask.py
 ```
+If you encounter the following issue:
+
+ModuleNotFoundError: No module named 'detection3d'
+
+You can resolve it by using the command:
+```
+python -m detection3d.scripts.gen_landmark_mask_batch
+```
 
 Finally, prepare dataset splitting files for training (``train.csv``) and testing (``test.csv``). 
 
