@@ -17,6 +17,10 @@ Create a new conda environment and install required packages accordingly.
 conda install pytorch==2.0.0 torchvision==0.15.0 torchaudio==2.0.0 pytorch-cuda=11.8 -c pytorch -c nvidia
 pip install -r requirements.txt
 ```
+## Execution Guide and Data Preparation
+To execute this code correctly, you must first prepare the ground-truth points. In our case, we used 8 points per subject, and we utilized 3D Slicer to prepare them. Once the ground-truth points are prepared, convert the files to .csv format. The second step is to round the coordinates of the points to keep two decimal places. The third step involves using the .csv files and the corresponding images to generate the segmentation masks. After this, you can use the script lmk_det_train.py to perform training. In our case, we used segmented images of the pelvis. For image segmentation, we multiplied the images by their masks.
+
+All steps are detailed below.
 
 ## Preprocessing for training
 
