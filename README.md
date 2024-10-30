@@ -23,7 +23,7 @@ To execute this code correctly, you must first prepare the ground-truth points. 
 All steps are detailed below.
 
 ## DATA preprocessing 
-
+For the data, we used 200 pelvic images collected from an open-source database.  
 ## Image data segmentation
 If the images are not segmented, they need to be segmented. A script that allows you to segment images (by multiplying the RAW image with the segmentation mask) is available at /Preprocessing:
 ```
