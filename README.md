@@ -60,7 +60,7 @@ Make sure to replace input_folder with the path to the folder containing the inp
 
 
 ## Generate landmark masks for training
-First, the users need to prepare medical images and their corresponding landmark annotations. The ``assets`` folder contains an example image (``case_001.nii.gz``) and landmark annotation file (``case_001.csv``). Then, generate landmark masks (e.g, ``case_001_landmark_mask.nii.gz``) with the folowing code :
+First, users need to prepare the medical images and their corresponding landmark annotations. The assets folder contains an example image (case_001.nii.gz) and a landmark annotation file (case_001.csv). You need to update the paths for the input images, the input landmark file, the output folder, and the CSV file that contains the landmark labels in gen_landmark_mask.py. Then, generate the landmark masks (e.g., case_001_landmark_mask.nii.gz) with the following code:
 ```
 cd Landmark_detection/detection3d/scripts
 python gen_landmark_mask.py
