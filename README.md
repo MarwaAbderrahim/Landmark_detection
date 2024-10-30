@@ -41,7 +41,7 @@ To convert the ground truth file containing landmarks of each image from the FCS
 
 ```
 cd preprocessing
-python fscv-to-csv.py -i input_folder -o output_folder
+python fcsv-to-csv.py -i input_folder -o output_folder
 ```
 
 Replace input_folder with the path to the folder containing the FCSV files, and output_folder with the path to the folder where you want to save the CSV files.
