@@ -9,7 +9,7 @@ cfg = __C
 ##################################
 __C.general = {}
 
-__C.general.training_image_list_file = '/workspace/train.csv'
+__C.general.training_image_list_file = '../assets/train.csv'
 
 __C.general.validation_image_list_file = ''
 
@@ -25,7 +25,7 @@ __C.general.target_landmark_label = {
         "sp":8,
 }
 
-__C.general.save_dir = '/workspace/output'
+__C.general.save_dir = './output'
 
 __C.general.resume_epoch = -1
 
