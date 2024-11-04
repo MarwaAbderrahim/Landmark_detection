@@ -23,7 +23,24 @@ To execute this code correctly, you must first prepare the ground-truth points. 
 All steps are detailed below.
 
 ## DATA preprocessing 
-For the data, we used 200 pelvic images collected from an open-source database.  
+### Data
+
+We used a set of 200 pelvic images collected from an open-source database. You can download the dataset [here](https://abysmedical.sharepoint.com/sites/Referentielqualite/Documents%20partages/Forms/AllItems.aspx?csf=1&web=1&e=bWOitz&CID=7cf0e6c5%2D5232%2D47b4%2Dafca%2D7d77846e72a2&FolderCTID=0x01200022952D5BC156AF47ADE8D0295FB0F37F&id=%2Fsites%2FReferentielqualite%2FDocuments%20partages%2F02%20%2D%20R%26D%2F124%2DAI%20Landmarking&viewid=a1b8372e%2D361d%2D4c18%2Daade%2Dc4a5075d4e3c).
+
+After downloading, please place the folders in the `../assets/` directory to ensure proper data access.
+
+You can use the data directly for training without going through processing steps. For this, you will use the following files:
+
+- **`data_v2`**: Contains the segmented images.
+- **`landmark_mask_v2`**: Contains the generated landmark masks.
+- **`landmark_v2`**: Contains the CSV file after rounding.
+
+To start the training process, you can directly use the command:
+
+```
+python lmk_det_train.py
+```
+
 ## Image data segmentation
 If the images are not segmented, they need to be segmented. A script that allows you to segment images (by multiplying the RAW image with the segmentation mask) is available at /Preprocessing:
 ```
