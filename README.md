@@ -105,5 +105,3 @@ To mesure the error analysis. Use the following code:
 cd detection3d/vis
 python error_analysis.py --labeled "path/labeled_landmarks.csv"  --detected "path/detected_landmarks.csv"
 ```
-The converted FCSV file will be stored in the same folder as the original CSV predicted landmark file.
-
