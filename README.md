@@ -65,7 +65,6 @@ First, users need to prepare the medical images and their corresponding landmark
 cd Landmark_detection/detection3d/utils
 python gen_landmark_mask_batch.py
 ```
-If you encounter the following issue:
 Finally, prepare dataset splitting files for training (``train.csv``) and testing (``test.csv``). 
 
 ## Training
