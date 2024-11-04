@@ -138,7 +138,7 @@ def train(config_file):
                 last_save_epoch = epoch_idx
 
         writer.add_scalar('Train/Loss', train_loss.item(), batch_idx)
-        early_stopping(train_loss.item())  
+        early_stopping(train_loss.item(), net)  
         
         if early_stopping.early_stop:
              print("Early stopping")
