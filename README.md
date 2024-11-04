@@ -62,18 +62,10 @@ Make sure to replace input_folder with the path to the folder containing the inp
 ## Generate landmark masks for training
 First, users need to prepare the medical images and their corresponding landmark annotations. The assets folder contains an example image (case_001.nii.gz) and a landmark annotation file (case_001.csv). You need to update the paths for the input images, the input landmark file, the output folder, and the CSV file that contains the landmark labels in gen_landmark_mask.py. Then, generate the landmark masks (e.g., case_001_landmark_mask.nii.gz) with the following code:
 ```
-cd Landmark_detection/detection3d/scripts
-python gen_landmark_mask.py
+cd Landmark_detection/detection3d/utils
+python gen_landmark_mask_batch.py
 ```
 If you encounter the following issue:
-
-ModuleNotFoundError: No module named 'detection3d'
-
-You can resolve it by using the command:
-```
-python -m detection3d.scripts.gen_landmark_mask_batch
-```
-
 Finally, prepare dataset splitting files for training (``train.csv``) and testing (``test.csv``). 
 
 ## Training
