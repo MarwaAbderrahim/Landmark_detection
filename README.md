@@ -69,8 +69,13 @@ If you encounter the following issue:
 Finally, prepare dataset splitting files for training (``train.csv``) and testing (``test.csv``). 
 
 ## Training
-Run the following code for training.
-The user may need to modify training settings in ``./config/lmk_train_config.py``. By default, the model will be saved in ``./saves/weights``.
+To begin training, follow these steps:
+
+1. Prepare a CSV file (an example can be found in assets/train.csv) that contains the columns: image_name, image_path, landmark_file_path, and landmark_mask_path. This file should list the images to be used in training. Specify the path to this CSV file in ./config/lmk_train_config.py.
+
+2. You may also want to adjust training settings in ./config/lmk_train_config.py. By default, the model's weights will be saved to ./saves/weights.
+
+To start training, navigate to the detection3d directory and run the following command:
 ```
 cd detection3d
 python lmk_det_train.py
