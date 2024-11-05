@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import SimpleITK as sitk
 import torch
+import os
 from torch.utils.data import Dataset
 
 from detection3d.utils.image_tools import select_random_voxels_in_multi_class_mask, \
@@ -19,12 +20,17 @@ def read_landmark_coords(image_name_list, landmark_file_path, target_landmark_la
   assert len(image_name_list) == len(landmark_file_path)
 
   label_dict = {}
+  current_dir = os.path.dirname(__file__)  
+  project_dir = os.path.abspath(os.path.join(current_dir, '..', '..'))
+
   for idx, image_name in enumerate(image_name_list):
     label_dict[image_name] = {}
     label_dict[image_name]['label'] = []
     label_dict[image_name]['name'] = []
     label_dict[image_name]['coords'] = []
-    landmark_file_df = pd.read_csv(landmark_file_path[idx])
+    landmark_csv_path = os.path.abspath(os.path.join(project_dir, landmark_file_path[idx]))
+    print("landmark_file_path[idx]", landmark_csv_path)
+    landmark_file_df = pd.read_csv(landmark_csv_path)
 
     for row_idx in range(len(landmark_file_df)):
       landmark_name = landmark_file_df['name'][row_idx]
@@ -48,9 +54,15 @@ def read_image_list(image_list_file, mode):
   Reads the training image list file and returns a list of image file names.
   """
   images_df = pd.read_csv(image_list_file)
+  print("images_df", images_df)
   image_name_list = images_df['image_name'].tolist()
   image_path_list = images_df['image_path'].tolist()
-
+  current_dir = os.path.dirname(__file__)
+  project_dir = os.path.abspath(os.path.join(current_dir, '..', '..'))
+  # Construire la liste des chemins d'images avec le chemin du projet
+  image_path_list = [os.path.join(project_dir, image_path) for image_path in images_df['image_path'].tolist()]
+  # Afficher les chemins d'images
+  print("image_path_list", image_path_list)
   if mode == 'test':
     return image_name_list, image_path_list, None, None
 
@@ -97,6 +109,21 @@ class LandmarkDetectionDataset(Dataset):
     self.landmark_coords_dict = read_landmark_coords(
       self.image_name_list, self.landmark_file_path, self.target_landmark_label
     )
+    # Obtenir le répertoire actuel
+    current_dir = os.path.dirname(__file__)
+    project_dir = os.path.abspath(os.path.join(current_dir, '..', '..'))
+
+    # Convertir les chemins d'images relatifs en chemins absolus
+    self.image_path_list = [os.path.join(project_dir, path) for path in self.image_path_list]
+    self.landmark_file_path = [os.path.join(project_dir, path) for path in self.landmark_file_path]
+    
+    self.landmark_mask_path = [os.path.join(project_dir, path) for path in self.landmark_mask_path]
+
+    self.target_landmark_label = target_landmark_label
+    self.landmark_coords_dict = read_landmark_coords(
+            self.image_name_list, self.landmark_file_path, self.target_landmark_label
+        )
+
     self.crop_spacing = np.array(crop_spacing, dtype=np.float32)
     self.crop_size = np.array(crop_size, dtype=np.float32)
     self.sampling_method = sampling_method
