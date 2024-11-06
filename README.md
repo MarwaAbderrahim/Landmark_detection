@@ -29,7 +29,7 @@ We used a set of 140 pelvic images collected from an open-source database. You c
 
 After downloading, please place the folders in the `../assets/` directory to ensure proper data access.
 
-You can use the data directly for training without going through processing steps. For this, you will use the following files:
+You can use the data directly for training without going through Pre-processing steps. For this, you will use the following files:
 
 - **`data_v2`**: Contains the segmented images.
 - **`landmark_mask_v2`**: Contains the generated landmark masks.
