@@ -25,7 +25,7 @@ All steps are detailed below.
 ## DATA preprocessing 
 ### Data
 
-We used a set of 200 pelvic images collected from an open-source database. You can download the dataset [here](https://abysmedical.sharepoint.com/sites/Referentielqualite/Documents%20partages/Forms/AllItems.aspx?csf=1&web=1&e=bWOitz&CID=7cf0e6c5%2D5232%2D47b4%2Dafca%2D7d77846e72a2&FolderCTID=0x01200022952D5BC156AF47ADE8D0295FB0F37F&id=%2Fsites%2FReferentielqualite%2FDocuments%20partages%2F02%20%2D%20R%26D%2F124%2DAI%20Landmarking&viewid=a1b8372e%2D361d%2D4c18%2Daade%2Dc4a5075d4e3c).
+We used a set of 140 pelvic images collected from an open-source database. You can download the dataset [here](https://abysmedical.sharepoint.com/sites/Referentielqualite/Documents%20partages/Forms/AllItems.aspx?csf=1&web=1&e=bWOitz&CID=7cf0e6c5%2D5232%2D47b4%2Dafca%2D7d77846e72a2&FolderCTID=0x01200022952D5BC156AF47ADE8D0295FB0F37F&id=%2Fsites%2FReferentielqualite%2FDocuments%20partages%2F02%20%2D%20R%26D%2F124%2DAI%20Landmarking&viewid=a1b8372e%2D361d%2D4c18%2Daade%2Dc4a5075d4e3c).
 
 After downloading, please place the folders in the `../assets/` directory to ensure proper data access.
 
