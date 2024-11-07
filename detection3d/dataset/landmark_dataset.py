@@ -29,7 +29,6 @@ def read_landmark_coords(image_name_list, landmark_file_path, target_landmark_la
     label_dict[image_name]['name'] = []
     label_dict[image_name]['coords'] = []
     landmark_csv_path = os.path.abspath(os.path.join(project_dir, landmark_file_path[idx]))
-    print("landmark_file_path[idx]", landmark_csv_path)
     landmark_file_df = pd.read_csv(landmark_csv_path)
 
     for row_idx in range(len(landmark_file_df)):
@@ -54,7 +53,6 @@ def read_image_list(image_list_file, mode):
   Reads the training image list file and returns a list of image file names.
   """
   images_df = pd.read_csv(image_list_file)
-  print("images_df", images_df)
   image_name_list = images_df['image_name'].tolist()
   image_path_list = images_df['image_path'].tolist()
   current_dir = os.path.dirname(__file__)
