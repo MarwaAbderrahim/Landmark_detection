@@ -59,8 +59,7 @@ def read_image_list(image_list_file, mode):
   project_dir = os.path.abspath(os.path.join(current_dir, '..', '..'))
   # Construire la liste des chemins d'images avec le chemin du projet
   image_path_list = [os.path.join(project_dir, image_path) for image_path in images_df['image_path'].tolist()]
-  # Afficher les chemins d'images
-  print("image_path_list", image_path_list)
+
   if mode == 'test':
     return image_name_list, image_path_list, None, None
 
